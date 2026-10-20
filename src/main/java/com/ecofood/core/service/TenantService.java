@@ -1,5 +1,6 @@
 package com.ecofood.core.service;
 
+import com.ecofood.core.dto.TenantLoginInfoResponse;
 import com.ecofood.core.dto.TenantOnboardRequest;
 import com.ecofood.core.dto.TenantOnboardResponse;
 import com.ecofood.core.dto.TenantResponse;
@@ -14,4 +15,7 @@ public interface TenantService {
   TenantOnboardResponse onboardTenant(TenantOnboardRequest request);
 
   TenantResponse getById(String tenantId);
+
+  /** Resolves a frontend-supplied "domain" (hostname, or a dev stand-in) to its tenant's login config. */
+  TenantLoginInfoResponse getLoginInfoByDomain(String domain);
 }

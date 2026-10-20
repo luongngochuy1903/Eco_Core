@@ -22,4 +22,7 @@ public class TenantResponse {
 
   /** Null unless this tenant's partnerType is ENTERPRISE/REGIONAL_ENTERPRISE — see TenantEntity.enterpriseId. */
   private String enterpriseId;
+
+  /** Null unless set at onboarding — the actual origin this tenant's frontend is served from. */
+  private String domainUrl;
 }
