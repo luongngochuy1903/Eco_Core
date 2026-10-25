@@ -2,6 +2,7 @@ package com.ecofood.core.client;
 
 import com.ecofood.core.dto.TenantResponse;
 import com.ecofood.core.service.TenantQueryService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,11 @@ public class CoreTenantQueryClient {
     return tenantQueryService.getById(tenantId);
   }
 
-  public TenantResponse getByRealm(String realm) {
-    return tenantQueryService.getByRealm(realm);
+  public List<TenantResponse> getAllByRealm(String realm) {
+    return tenantQueryService.getAllByRealm(realm);
+  }
+
+  public List<String> getScopedTenantIds(String tenantId) {
+    return tenantQueryService.getScopedTenantIds(tenantId);
   }
 }

@@ -13,5 +13,6 @@ public interface UserQueryService {
 
   UserQueryResponse getById(String userId);
 
-  UserQueryResponse getByUsername(String username);
+  /** Resolves by email (case-insensitive) — the identifier the Keycloak login flow is resolved back by, not username. */
+  UserQueryResponse getByEmail(String email);
 }
