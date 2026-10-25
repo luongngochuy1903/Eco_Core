@@ -13,6 +13,13 @@ package com.ecofood.core.enums;
  * userACL-module import, ahead of common/ being split into its own artifact.
  */
 public enum PartnerTypeEnum {
+  /**
+   * The platform admin tenant — not scoped to any Enterprise/Master/Tenant
+   * hierarchy (see app/docs/ACL_ROLE_MODEL.md §1.1). Exactly one may ever
+   * exist across the whole platform; see TenantServiceImpl.onboardTenant's
+   * uniqueness guard.
+   */
+  ECO,
   ENTERPRISE,
   REGIONAL_ENTERPRISE,
   ECOSYSTEM_PARTNER,

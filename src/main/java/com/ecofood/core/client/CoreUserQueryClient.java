@@ -16,7 +16,7 @@ public class CoreUserQueryClient {
     return userQueryService.getById(userId);
   }
 
-  public UserQueryResponse getByUsername(String username) {
-    return userQueryService.getByUsername(username);
+  public UserQueryResponse getByEmail(String email) {
+    return userQueryService.getByEmail(email);
   }
 }

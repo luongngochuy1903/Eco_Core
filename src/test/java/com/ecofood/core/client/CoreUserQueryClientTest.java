@@ -25,11 +25,11 @@ class CoreUserQueryClientTest {
   }
 
   @Test
-  void getByUsernameDelegatesToUserQueryService() {
+  void getByEmailDelegatesToUserQueryService() {
     CoreUserQueryClient client = new CoreUserQueryClient(userQueryService);
-    UserQueryResponse expected = UserQueryResponse.builder().username("jane.doe").build();
-    when(userQueryService.getByUsername("jane.doe")).thenReturn(expected);
+    UserQueryResponse expected = UserQueryResponse.builder().email("jane.doe@example.com").build();
+    when(userQueryService.getByEmail("jane.doe@example.com")).thenReturn(expected);
 
-    assertThat(client.getByUsername("jane.doe")).isSameAs(expected);
+    assertThat(client.getByEmail("jane.doe@example.com")).isSameAs(expected);
   }
 }

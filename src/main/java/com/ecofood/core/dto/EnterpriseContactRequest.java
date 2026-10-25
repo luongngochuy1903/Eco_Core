@@ -1,6 +1,7 @@
 package com.ecofood.core.dto;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 import lombok.Data;
 
@@ -11,8 +12,12 @@ import lombok.Data;
 @Data
 public class EnterpriseContactRequest {
 
+  @NotBlank
   private String contactPartyName;
+
+  @NotBlank
   private String contactPartyLastName;
+
   private String contactDepartment;
   private String contactDesignation;
 

@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +31,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserCreateRequest {
 
+  // Keycloak's own username validator rejects whitespace (error-username-
+  // invalid-character) — catching it here gives a clear 400 instead of a
+  // cryptic failure deep inside the Keycloak Admin API call.
   @NotBlank
+  @Pattern(regexp = "\\S+", message = "must not contain whitespace")
   private String username;
 
   @NotBlank
