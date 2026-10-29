@@ -5,6 +5,7 @@ import com.ecofood.core.dto.AssignTenantRolesResponse;
 import com.ecofood.core.dto.EligibleTenantResponse;
 import com.ecofood.core.dto.PageResponse;
 import com.ecofood.core.dto.UserCreateRequest;
+import com.ecofood.core.dto.UserDetailResponse;
 import com.ecofood.core.dto.UserDirectoryResponse;
 import com.ecofood.core.dto.UserResponse;
 import java.util.List;
@@ -13,6 +14,9 @@ import java.util.List;
 public interface UserService {
 
   UserResponse createUser(UserCreateRequest request);
+
+  /** Basic-info section of the "Edit User" modal — see UserDetailResponse. */
+  UserDetailResponse getById(String userId);
 
   /** Grants an already-existing user a role on a tenant — never creates a new UserEntity or touches Keycloak. */
   AssignTenantRolesResponse assignTenantRoles(String userId, AssignTenantRolesRequest request);
