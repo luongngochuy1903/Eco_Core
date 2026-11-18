@@ -33,4 +33,7 @@ public class TenantResponse {
 
   /** This tenant's primary point of contact — every non-boolean field off TenantEntity.contact. */
   private ContactResponse contact;
+
+  /** ISO country from the preferred onboarding contact address. */
+  private String country;
 }

@@ -25,4 +25,6 @@ public interface TenantQueryService {
    * without duplicating the query.
    */
   List<String> getScopedTenantIds(String tenantId);
+  com.ecofood.core.dto.PropositionTenantReference propositionReference(String tenantId);
+  List<com.ecofood.core.dto.PropositionTenantReference> propositionReferences();
 }
