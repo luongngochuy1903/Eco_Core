@@ -24,4 +24,6 @@ public class CoreTenantQueryClient {
   public List<String> getScopedTenantIds(String tenantId) {
     return tenantQueryService.getScopedTenantIds(tenantId);
   }
+  public com.ecofood.core.dto.PropositionTenantReference propositionReference(String id) { return tenantQueryService.propositionReference(id); }
+  public List<com.ecofood.core.dto.PropositionTenantReference> propositionReferences() { return tenantQueryService.propositionReferences(); }
 }
