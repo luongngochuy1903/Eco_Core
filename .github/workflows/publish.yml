@@ -1,0 +1,44 @@
+name: Publish to GitHub Packages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+          # Matches the <distributionManagement><repository><id>github</id>
+          # in pom.xml.
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+
+      - name: Build, test, and publish
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # mvn deploy runs the full lifecycle (compile, test, package, install,
+        # deploy) first, so a failing test blocks publish the same way
+        # `app`'s CI blocks a bad PR with `mvn verify`.
+        #
+        # GitHub Packages (Maven) will reject this with a 409 if the version
+        # in pom.xml was already published — that's expected, not a workflow
+        # bug: versions are immutable, so every merge that should publish a
+        # new artifact must also bump <version> in pom.xml first.
+        run: mvn clean deploy
