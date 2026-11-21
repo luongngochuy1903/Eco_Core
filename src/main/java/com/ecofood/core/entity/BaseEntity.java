@@ -43,11 +43,11 @@ public class BaseEntity {
 
   @CreatedBy
   @Field("created_by_user_identifier")
-  private String createdBy;
+  private ObjectId createdBy;
 
   @LastModifiedBy
   @Field("updated_by_user_identifier")
-  private String updatedBy;
+  private ObjectId updatedBy;
 
   @Field(FIELD_DELETED)
   private Boolean deleted = false;
@@ -81,19 +81,19 @@ public class BaseEntity {
   }
 
   public String getCreatedBy() {
-    return createdBy;
+    return createdBy.toHexString();
   }
 
   public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
+    this.createdBy = new ObjectId(createdBy);
   }
 
   public String getUpdatedBy() {
-    return updatedBy;
+    return updatedBy.toHexString();
   }
 
   public void setUpdatedBy(String updatedBy) {
-    this.updatedBy = updatedBy;
+    this.updatedBy = new ObjectId(updatedBy);
   }
 
   public Boolean getDeleted() {
