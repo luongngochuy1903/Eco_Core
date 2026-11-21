@@ -41,4 +41,8 @@ jobs:
         # in pom.xml was already published — that's expected, not a workflow
         # bug: versions are immutable, so every merge that should publish a
         # new artifact must also bump <version> in pom.xml first.
-        run: mvn clean deploy
+        #
+        # mvnw has no executable bit in git (same as app's CI) — `bash mvnw`
+        # interprets the script directly instead of relying on the OS exec
+        # permission check.
+        run: bash mvnw clean deploy
