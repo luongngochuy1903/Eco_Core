@@ -80,20 +80,20 @@ public class BaseEntity {
     this.updatedAt = updatedAt;
   }
 
-  public String getCreatedBy() {
-    return createdBy.toHexString();
+  public ObjectId getCreatedBy() {
+    return createdBy;
   }
 
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = new ObjectId(createdBy);
+  public void setCreatedBy(ObjectId createdBy) {
+    this.createdBy = createdBy;
   }
 
-  public String getUpdatedBy() {
-    return updatedBy.toHexString();
+  public ObjectId getUpdatedBy() {
+    return updatedBy;
   }
 
-  public void setUpdatedBy(String updatedBy) {
-    this.updatedBy = new ObjectId(updatedBy);
+  public void setUpdatedBy(ObjectId updatedBy) {
+    this.updatedBy = updatedBy;
   }
 
   public Boolean getDeleted() {
