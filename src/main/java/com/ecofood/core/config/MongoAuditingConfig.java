@@ -1,6 +1,8 @@
 package com.ecofood.core.config;
 
 import java.util.Optional;
+
+import org.bson.types.ObjectId;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -27,15 +29,24 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class MongoAuditingConfig {
 
   @Bean
-  public AuditorAware<String> auditorAware() {
+  public AuditorAware<ObjectId> auditorAware() {
     return () -> {
-      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      Authentication authentication =
+              SecurityContextHolder.getContext().getAuthentication();
+
       if (authentication == null
-          || !authentication.isAuthenticated()
-          || authentication instanceof AnonymousAuthenticationToken) {
+              || !authentication.isAuthenticated()
+              || authentication instanceof AnonymousAuthenticationToken) {
         return Optional.empty();
       }
-      return Optional.ofNullable(authentication.getName());
+
+      String userId = authentication.getName();
+
+      if (!ObjectId.isValid(userId)) {
+        return Optional.empty();
+      }
+
+      return Optional.of(new ObjectId(userId));
     };
   }
 }
