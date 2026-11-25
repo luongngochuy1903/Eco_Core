@@ -10,7 +10,10 @@ import java.util.List;
  * for the editor UI, same convention PlanResponse's siblings use elsewhere.
  * `planItems`/`additionalInfoFields`/`invoiceHolder` are this Orchestrator's
  * own configured field lists — see PlanSaleOrchestratorRequest for what each
- * one means.
+ * one means. `canEdit` is false when the viewer can see this Orchestrator
+ * (same Proposition) but didn't create it and isn't the owning Enterprise —
+ * view access is scoped to "same Proposition," edit access stays scoped to
+ * the creating Tenant (or Enterprise).
  */
 public record PlanSaleOrchestratorResponse(
         String id,
@@ -25,6 +28,7 @@ public record PlanSaleOrchestratorResponse(
         Instant createdAt,
         Instant updatedAt,
         String createdBy,
-        String updatedBy) {
+        String updatedBy,
+        boolean canEdit) {
     public record PlanRef(String planId, String planCode, String planName, com.ecofood.core.enums.PlanStatusEnum planStatus) {}
 }
