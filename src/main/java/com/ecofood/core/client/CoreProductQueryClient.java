@@ -18,4 +18,5 @@ public class CoreProductQueryClient {
   public List<ProductProcessResponse> processes(String id) { return service.processes(id); }
   public ProductResponse getVersion(String id,int version) { return service.getVersion(id,version); }
   public ProductResponse getApprovedVersion(String id,int version) { return service.getApprovedVersion(id,version); }
+  public boolean isVersionApproved(String id,int version) { return service.isVersionApproved(id,version); }
 }
