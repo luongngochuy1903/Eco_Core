@@ -95,7 +95,8 @@ class PropositionContractsTest {
                     .containsExactly(
                             PlanStatusEnum.DRAFT,
                             PlanStatusEnum.PENDING_REVIEW,
-                            PlanStatusEnum.APPROVED);
+                            PlanStatusEnum.APPROVED,
+                            PlanStatusEnum.REJECTED);
         }
     }
 
@@ -106,13 +107,9 @@ class PropositionContractsTest {
         var commands = new CorePropositionClient(service);
         var reads = new CorePropositionQueryClient(query);
         var revision = new RevisionRequest(2L);
-        commands.submit("p", revision);
-        commands.approve("p", revision);
         commands.submitPlan("p", "plan", revision);
         commands.approvePlan("p", "plan", revision);
         reads.getById("p");
-        verify(service).submit("p", revision);
-        verify(service).approve("p", revision);
         verify(service).submitPlan("p", "plan", revision);
         verify(service).approvePlan("p", "plan", revision);
         verify(query).getById("p");

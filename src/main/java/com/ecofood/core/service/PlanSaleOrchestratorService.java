@@ -1,16 +1,19 @@
 package com.ecofood.core.service;
 
-import com.ecofood.core.dto.PlanSaleOrchestratorDtos;
-import com.ecofood.core.dto.PlanSaleOrchestratorView;
-
-import java.util.Optional;
+import com.ecofood.core.dto.PageResponse;
+import com.ecofood.core.dto.PlanSaleOrchestratorDirectoryResponse;
+import com.ecofood.core.dto.PlanSaleOrchestratorRequest;
+import com.ecofood.core.dto.PlanSaleOrchestratorResponse;
 
 /** Public module contract. Implementations and persistence belong to backend main. */
 public interface PlanSaleOrchestratorService {
-  Optional<? extends PlanSaleOrchestratorView> get(String proposition, String plan);
-  PlanSaleOrchestratorView create(String proposition, String plan, PlanSaleOrchestratorDtos.Save request);
-  PlanSaleOrchestratorView edit(String proposition, String plan, PlanSaleOrchestratorDtos.Save request);
-  PlanSaleOrchestratorView version(String proposition, String plan, PlanSaleOrchestratorDtos.Revision request);
-  PlanSaleOrchestratorDtos.Validation validate(String proposition, String plan, PlanSaleOrchestratorDtos.Revision request);
-  PlanSaleOrchestratorView activate(String proposition, String plan, PlanSaleOrchestratorDtos.Revision request);
+    PlanSaleOrchestratorResponse get(String propositionId, String id);
+
+    PlanSaleOrchestratorResponse create(String propositionId, PlanSaleOrchestratorRequest request);
+
+    PlanSaleOrchestratorResponse update(String propositionId, String id, PlanSaleOrchestratorRequest request);
+
+    /** One row per Sale Orchestrator visible to the caller's own Tenant in this Proposition. */
+    PageResponse<PlanSaleOrchestratorDirectoryResponse> directory(
+            String propositionId, int page, int size, String sort, String search);
 }

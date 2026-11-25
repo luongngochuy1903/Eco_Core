@@ -36,4 +36,7 @@ public class TenantResponse {
 
   /** ISO country from the preferred onboarding contact address. */
   private String country;
+
+  /** Null until set via the tenant edit form's Configuration tab. */
+  private String logoUrl;
 }

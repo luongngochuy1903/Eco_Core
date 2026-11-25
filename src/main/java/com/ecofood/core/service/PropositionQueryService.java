@@ -10,6 +10,9 @@ public interface PropositionQueryService {
 
     PlanResponse getPlan(String id, String planId);
 
+    /** One row per Plan visible to the caller — backs the "Plans & Market Configuration" directory tab. */
+    PageResponse<PlanResponse> planDirectory(String id, int page, int size, String sort, String search);
+
     PropositionOptionsResponse options();
 
     PropositionCurrencySettingsResponse currencySettings();
