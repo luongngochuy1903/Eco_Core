@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import jakarta.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 public record EconomicMetricsRequest(
         @Min(1) @Max(12) Integer month,
@@ -13,7 +14,16 @@ public record EconomicMetricsRequest(
         @JsonFormat(shape = JsonFormat.Shape.STRING) @DecimalMin("0") BigDecimal ingredientCost,
         @JsonFormat(shape = JsonFormat.Shape.STRING) @DecimalMin("0") BigDecimal platformCost,
         @Min(1) @Max(4) Integer quarter,
-        @JsonFormat(shape = JsonFormat.Shape.STRING) @DecimalMin("0") BigDecimal revenue) {
+        @JsonFormat(shape = JsonFormat.Shape.STRING) @DecimalMin("0") BigDecimal revenue,
+        @JsonInclude(JsonInclude.Include.NON_NULL) String tenantId,
+        @JsonInclude(JsonInclude.Include.NON_NULL) String currency) {
+
+    /** Existing expected/legacy metrics do not carry a sales tenant or currency. */
+    public EconomicMetricsRequest(Integer month, Integer year, BigDecimal totalSalesVolume,
+            BigDecimal profit, BigDecimal ingredientCost, BigDecimal platformCost,
+            Integer quarter, BigDecimal revenue) {
+        this(month, year, totalSalesVolume, profit, ingredientCost, platformCost, quarter, revenue, null, null);
+    }
 
     public EconomicMetricsRequest(
             Integer month,

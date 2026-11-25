@@ -11,6 +11,18 @@ import org.junit.jupiter.api.Test;
 
 class PropositionContractsTest {
     @Test
+    void actualMetricsSerializeTenantAndCurrencyWhileLegacyConstructorsRemainCompatible() throws Exception {
+        var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+        var row = new EconomicMetricsRequest(11, 2026, new BigDecimal("2"), new BigDecimal("100"),
+                BigDecimal.ZERO, new BigDecimal("50"), null, new BigDecimal("200"), "partner", "USD");
+        var json = mapper.readTree(mapper.writeValueAsString(row));
+        assertThat(json.get("tenantId").asText()).isEqualTo("partner");
+        assertThat(json.get("currency").asText()).isEqualTo("USD");
+        assertThat(mapper.readValue(mapper.writeValueAsString(row), EconomicMetricsRequest.class)).isEqualTo(row);
+        var legacy = new EconomicMetricsRequest(null, 2026, null, null, null, null, 4, BigDecimal.ZERO);
+        assertThat(mapper.readTree(mapper.writeValueAsString(legacy)).has("tenantId")).isFalse();
+    }
+    @Test
     void quarterlyRevenueValidatesPeriodsAndKeepsLegacyMonthsReadable() {
         try (var factory = Validation.buildDefaultValidatorFactory()) {
             var validator = factory.getValidator();
