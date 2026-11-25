@@ -55,13 +55,11 @@ public interface PropositionService {
     void approvePlans(String productId, int version, List<String> planIds);
 
     /**
-     * Accumulates a submitted sale's known contribution into the
-     * Proposition's own actualMetrics — same EconomicMetricsRequest shape
-     * as expectMetrics, bucketed by calendar quarter (never month). Called
-     * only from the already-authorized submit-transaction flow, once per
-     * resolved Plan line; best-effort — a failure here must never undo the
-     * Invoice itself, which already committed separately.
+     * Legacy quarterly accumulator retained for existing integrations.
+     * New sales write tenant/month/currency actuals atomically with their Invoices
+     * through the backend's PropositionSalesMetrics; do not call both paths.
      */
+    @Deprecated
     void recordActualSale(String propositionId, Instant occurredAt, BigDecimal totalSalesVolume,
             BigDecimal ingredientCost, BigDecimal platformCost, BigDecimal profit);
 }
