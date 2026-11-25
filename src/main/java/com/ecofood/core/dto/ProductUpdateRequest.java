@@ -13,11 +13,10 @@ public record ProductUpdateRequest(
     @NotBlank String code,
     @NotBlank String category,
     String imageUrl,
-    List<@Valid ProductComponentRequest> componentProducts,
     @Valid ProductCostingRequest costing) {
   public ProductUpdateRequest(String name,String description,List<ProductIngredientRequest> ingredients,
       ProductRecipeRequest recipe,ProductPricingRequest pricing,Long expectedRevision,
-      String code,String category,String imageUrl,List<ProductComponentRequest> componentProducts) {
-    this(name,description,ingredients,recipe,pricing,expectedRevision,code,category,imageUrl,componentProducts,null);
+      String code,String category,String imageUrl) {
+    this(name,description,ingredients,recipe,pricing,expectedRevision,code,category,imageUrl,null);
   }
 }

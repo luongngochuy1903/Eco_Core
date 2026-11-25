@@ -18,14 +18,6 @@ public class CorePropositionClient {
         return service.update(id, r);
     }
 
-    public PropositionResponse submit(String id, RevisionRequest r) {
-        return service.submit(id, r);
-    }
-
-    public PropositionResponse approve(String id, RevisionRequest r) {
-        return service.approve(id, r);
-    }
-
     public PropositionResponse addPlan(String id, PlanRequest r) {
         return service.addPlan(id, r);
     }
