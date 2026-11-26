@@ -29,6 +29,7 @@ public record PlanSaleOrchestratorResponse(
         Instant updatedAt,
         String createdBy,
         String updatedBy,
-        boolean canEdit) {
+        boolean canEdit,
+        boolean createCustomer) {
     public record PlanRef(String planId, String planCode, String planName, com.ecofood.core.enums.PlanStatusEnum planStatus) {}
 }

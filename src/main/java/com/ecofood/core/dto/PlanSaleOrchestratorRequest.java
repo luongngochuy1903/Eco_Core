@@ -26,6 +26,12 @@ import java.util.List;
  * Left null/empty on create, each defaults server-side (planId/quantity
  * required, actualPrice optional; firstName/lastName/email/phoneNumber/
  * address all optional for invoiceHolder).
+ *
+ * <p>{@code createCustomer}: when true, submit-transaction auto-links the
+ * new Invoice to a Customer account whose {@code external_ids} contains the
+ * submitted invoiceHolder's {@code externalId} value — the server enforces
+ * that {@code invoiceHolder} then always carries a locked, required
+ * {@code externalId} field (see PlanSaleOrchestratorServiceImpl).
  */
 public record PlanSaleOrchestratorRequest(
         Long expectedRevision,
@@ -34,4 +40,5 @@ public record PlanSaleOrchestratorRequest(
         @NotEmpty @Size(max = 500) List<@NotBlank String> planIds,
         @Size(max = 100) List<@Valid SaleConfigurationField> planItems,
         @Size(max = 100) List<@Valid SaleConfigurationField> additionalInfoFields,
-        @Size(max = 100) List<@Valid SaleConfigurationField> invoiceHolder) {}
+        @Size(max = 100) List<@Valid SaleConfigurationField> invoiceHolder,
+        Boolean createCustomer) {}
