@@ -13,6 +13,11 @@ import com.ecofood.core.dto.UpdateDataAccessRuleRequest;
  */
 public interface DataAccessRuleService {
 
+  java.util.List<com.ecofood.core.dto.UserDirectoryResponse> eligibleUsers(String tenantId);
+
+  /** Deletes a rule and revokes its assignments; only its creator may delete. */
+  void delete(String id);
+
   DataAccessRuleResponse create(CreateDataAccessRuleRequest request);
 
   /** Backs the "Edit Data Access Rule" modal — see DataAccessRuleDetailResponse's javadoc on the editable flag. */

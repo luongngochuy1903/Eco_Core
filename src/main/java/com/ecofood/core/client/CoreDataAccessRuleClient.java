@@ -17,6 +17,8 @@ public class CoreDataAccessRuleClient {
 
   private final DataAccessRuleService dataAccessRuleService;
 
+  public void delete(String id) { dataAccessRuleService.delete(id); }
+
   public DataAccessRuleResponse create(CreateDataAccessRuleRequest request) {
     return dataAccessRuleService.create(request);
   }
