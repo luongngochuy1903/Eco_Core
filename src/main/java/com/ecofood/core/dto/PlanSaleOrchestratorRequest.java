@@ -28,10 +28,10 @@ import java.util.List;
  * address all optional for invoiceHolder).
  *
  * <p>{@code createCustomer}: when true, submit-transaction auto-links the
- * new Invoice to a Customer account whose {@code external_ids} contains the
- * submitted invoiceHolder's {@code externalId} value — the server enforces
- * that {@code invoiceHolder} then always carries a locked, required
- * {@code externalId} field (see PlanSaleOrchestratorServiceImpl).
+ * new Invoice to the Customer account whose email matches the submitted
+ * invoiceHolder's {@code email} value — the server enforces that
+ * {@code invoiceHolder}'s {@code email} field is always required (see
+ * PlanSaleOrchestratorServiceImpl).
  */
 public record PlanSaleOrchestratorRequest(
         Long expectedRevision,
