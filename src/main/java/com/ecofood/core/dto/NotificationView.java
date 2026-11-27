@@ -6,6 +6,7 @@ import java.time.Instant;
 public interface NotificationView {
   String getId();
   String getSubmissionId();
+  default String getComplaintId() { return null; }
   String getTenantId();
   String getRuleId();
   String getType();
