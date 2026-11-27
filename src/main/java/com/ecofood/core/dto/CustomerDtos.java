@@ -20,6 +20,12 @@ public final class CustomerDtos {
   public record OwnedInvoice(String id, String invoiceNumber, String type, String status, String paymentStatus,
       Instant transactionTime, Instant receivedAt, String currency,
       @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal totalAmount,
-      String invoiceDocumentId, List<Item> items) {}
+      String invoiceDocumentId, List<Item> items, String tenantId, String tenantName) {
+    public OwnedInvoice(String id, String invoiceNumber, String type, String status, String paymentStatus,
+        Instant transactionTime, Instant receivedAt, String currency, BigDecimal totalAmount,
+        String invoiceDocumentId, List<Item> items) {
+      this(id,invoiceNumber,type,status,paymentStatus,transactionTime,receivedAt,currency,totalAmount,invoiceDocumentId,items,null,null);
+    }
+  }
   public record Page<T>(List<T> content, int page, int size, boolean hasNext) {}
 }
