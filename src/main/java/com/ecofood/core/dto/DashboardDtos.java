@@ -11,7 +11,11 @@ import java.util.Set;
 public final class DashboardDtos {
   private DashboardDtos() {}
   public record Selection(String tenantId, String propositionId, String currency, int year,
-                          DashboardPeriodEnum period, Integer month, Integer quarter, boolean propositionTotal) {
+                          DashboardPeriodEnum period, Integer month, Integer quarter, boolean propositionTotal, List<String> tenantIds) {
+    public Selection { if (tenantIds != null) tenantIds = List.copyOf(new java.util.LinkedHashSet<>(tenantIds)); }
+    public Selection(String tenantId, String propositionId, String currency, int year, DashboardPeriodEnum period, Integer month, Integer quarter, boolean propositionTotal) {
+      this(tenantId, propositionId, currency, year, period, month, quarter, propositionTotal, null);
+    }
     public Set<Integer> months() {
       if (period == DashboardPeriodEnum.MONTHLY) return Set.of(month);
       if (period == DashboardPeriodEnum.QUARTERLY) return Set.of(quarter * 3 - 2, quarter * 3 - 1, quarter * 3);
@@ -28,7 +32,12 @@ public final class DashboardDtos {
       long coveredInvoices, long totalInvoices) {}
   public record Summary(Selection selection, List<String> tenantIds, Map<String, Metric> metrics,
                         Instant lastUpdatedAt, String timezone, List<String> notices) {}
-  public record Option(String id, String name) {}
+  public record Option(String id, String name, boolean accessible, List<String> scopeTenantIds,
+                       com.ecofood.core.enums.PartnerTypeEnum partnerType) {
+    public Option(String id, String name, boolean accessible, List<String> scopeTenantIds) { this(id, name, accessible, scopeTenantIds, null); }
+    public Option(String id, String name, boolean accessible) { this(id, name, accessible, accessible ? List.of(id) : List.of()); }
+    public Option(String id, String name) { this(id, name, true); }
+  }
   public record PropositionOption(String id, String name, List<String> tenantIds, String expectedCurrency,
                                   boolean canViewTotal) {}
   public record Filters(String currentTenantId, List<Option> tenants, List<PropositionOption> propositions,

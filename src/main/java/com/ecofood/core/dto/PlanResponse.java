@@ -18,8 +18,6 @@ public record PlanResponse(
         ProductCostingAttributeResponse costing,
         List<String> regionIds,
         List<String> tenantIds,
-        Instant startDate,
-        Instant endDate,
         PlanStatusEnum status,
         String approvedBy,
         Instant approvedAt,

@@ -13,6 +13,14 @@ import com.ecofood.core.dto.UpdateDataAccessRuleRequest;
  */
 public interface DataAccessRuleService {
 
+  /** DAR-specific Business Entity picker, including Regional children connected by OW/BL. */
+  java.util.List<com.ecofood.core.dto.DashboardDtos.Option> eligibleTenants();
+
+  java.util.List<com.ecofood.core.dto.UserDirectoryResponse> eligibleUsers(String tenantId);
+
+  /** Deletes a rule and revokes its assignments; only its creator may delete. */
+  void delete(String id);
+
   DataAccessRuleResponse create(CreateDataAccessRuleRequest request);
 
   /** Backs the "Edit Data Access Rule" modal — see DataAccessRuleDetailResponse's javadoc on the editable flag. */
@@ -23,10 +31,10 @@ public interface DataAccessRuleService {
 
   /**
    * Backs the "Data Access Rules" list — role-scoped via the caller's
-   * ACLService.getMaxLevel(), the exact same policy as TenantService.
-   * listTenantDirectory/UserService.listUserDirectory: SYSTEM sees every
+   * ACLService.getMaxLevel(): SYSTEM sees every
    * rule platform-wide; ENTERPRISE/MASTER_TENANT see every rule whose
-   * business entity is their own tenant or one of its sub-tenants; TENANT
+   * business entity is their own tenant, a direct MT child, or a Regional
+   * child connected by OW/BL (specific to DAR; the Tenant directory is unchanged); TENANT
    * sees only rules for its own tenant; CUSTOMER/NONE are rejected. search,
    * when non-blank, is a case-insensitive regex "contains" match on the
    * rule name. sort is "field,direction", defaulting to "updatedAt,desc".

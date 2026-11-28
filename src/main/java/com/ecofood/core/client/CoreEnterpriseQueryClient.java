@@ -20,4 +20,8 @@ public class CoreEnterpriseQueryClient {
   public List<String> ownedEnterpriseIds(String enterpriseId) {
     return enterpriseQueryService.ownedEnterpriseIds(enterpriseId);
   }
+
+  public List<String> dashboardChildEnterpriseIds(String enterpriseId) {
+    return enterpriseQueryService.dashboardChildEnterpriseIds(enterpriseId);
+  }
 }

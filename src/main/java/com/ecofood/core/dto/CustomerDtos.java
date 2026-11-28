@@ -17,14 +17,14 @@ public final class CustomerDtos {
       @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal unitPrice,
       @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal amount) {}
   /** Deliberately omits POS, submitter, financial snapshots and arbitrary POS payload. */
-  public record OwnedInvoice(String id, String invoiceNumber, String type, String status, String paymentStatus,
+  public record OwnedInvoice(String id, String status,
       Instant transactionTime, Instant receivedAt, String currency,
       @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal totalAmount,
       String invoiceDocumentId, List<Item> items, String tenantId, String tenantName) {
-    public OwnedInvoice(String id, String invoiceNumber, String type, String status, String paymentStatus,
+    public OwnedInvoice(String id, String status,
         Instant transactionTime, Instant receivedAt, String currency, BigDecimal totalAmount,
         String invoiceDocumentId, List<Item> items) {
-      this(id,invoiceNumber,type,status,paymentStatus,transactionTime,receivedAt,currency,totalAmount,invoiceDocumentId,items,null,null);
+      this(id,status,transactionTime,receivedAt,currency,totalAmount,invoiceDocumentId,items,null,null);
     }
   }
   public record Page<T>(List<T> content, int page, int size, boolean hasNext) {}

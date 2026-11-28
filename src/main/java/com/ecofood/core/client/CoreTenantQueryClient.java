@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CoreTenantQueryClient {
+  public String tenantCode(String tenantId) { return tenantQueryService.tenantCode(tenantId); }
 
   private final TenantQueryService tenantQueryService;
 

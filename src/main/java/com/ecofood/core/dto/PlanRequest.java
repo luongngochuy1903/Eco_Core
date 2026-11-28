@@ -1,7 +1,6 @@
 package com.ecofood.core.dto;
 
 import java.util.List;
-import java.time.Instant;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
@@ -24,6 +23,4 @@ public record PlanRequest(
         @Valid ProductCostingRequest costing,
         @Valid ProductPricingRequest pricing,
         @NotEmpty List<@NotBlank String> regionIds,
-        @NotEmpty List<@NotBlank String> tenantIds,
-        Instant startDate,
-        Instant endDate) {}
+        @NotEmpty List<@NotBlank String> tenantIds) {}

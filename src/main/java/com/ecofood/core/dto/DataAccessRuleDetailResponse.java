@@ -7,13 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-/**
- * Backs GET /api/v1/data-access-rules/{id} — the "Edit Data Access Rule"
- * modal, same concept as TenantResponse/UserDetailResponse. editable is
- * server-computed (AuthenticationContext.getUserId() vs the rule's own
- * createdBy — only the rule's creator may edit it), so the frontend never
- * has to independently re-derive that authorization decision.
- */
+/** Data Access Rule contract supporting multiple dashboard entity types. */
 @Data
 @AllArgsConstructor
 @Builder
@@ -25,7 +19,10 @@ public class DataAccessRuleDetailResponse {
   private String businessEntityId;
   private String businessEntityName;
   private AccessLevelEnum accessLevel;
+  /** Legacy single-type field, retained for existing clients and records. */
   private AccessEntityTypeEnum accessEntityType;
+
+  private java.util.List<AccessEntityTypeEnum> accessEntityTypes;
   private List<String> limitedEntityIds;
   private List<String> userIds;
   private boolean editable;

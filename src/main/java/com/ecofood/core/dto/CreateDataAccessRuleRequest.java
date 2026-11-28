@@ -7,19 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import lombok.Data;
 
-/**
- * POST /api/v1/data-access-rules — mirrors DataAccessRuleDetailPage.jsx's
- * payload exactly. businessEntityId is the tenant this rule applies for.
- * accessEntityType is a SINGLE value — a rule governs exactly one kind of
- * record (explicit instruction: "fix entity Type that we can only choose
- * 1"; this used to be a list supporting several entity types per rule, each
- * getting its own GroupEntity row — DataAccessRuleServiceImpl now creates
- * just one). limitedEntityIds is only meaningful when accessLevel is
- * LIMITED_ACCESS (ignored otherwise, same convention as the frontend's own
- * handleSave). userIds is who gets this rule — writes to each user's own
- * UserGroupEntity document, not a members list on the rule itself (see
- * DataAccessRuleServiceImpl).
- */
+/** Data Access Rule contract supporting multiple dashboard entity types. */
 @Data
 public class CreateDataAccessRuleRequest {
 
@@ -32,7 +20,10 @@ public class CreateDataAccessRuleRequest {
   @NotBlank
   private String description;
 
+  /** Legacy single-type field, retained for existing clients and records. */
   private AccessEntityTypeEnum accessEntityType;
+
+  private java.util.List<AccessEntityTypeEnum> accessEntityTypes;
 
   @NotNull
   private AccessLevelEnum accessLevel;
