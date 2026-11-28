@@ -7,5 +7,6 @@ import org.springframework.stereotype.Service;
 @Service @RequiredArgsConstructor
 public class CoreDashboardPropositionClient {
   private final DashboardPropositionQueryService service;
+  public List<com.ecofood.core.dto.DashboardDtos.Option> invoiceReferences(Set<String> ids) { return service.invoiceReferences(ids); }
   public List<DashboardProposition> find(String tenant, Set<String> ids) { return service.find(tenant, ids); }
 }

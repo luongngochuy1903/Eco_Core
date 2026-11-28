@@ -20,8 +20,8 @@ public final class ComplaintDtos {
   public record Capabilities(String tenantId, List<ComplaintTypeEnum> types, boolean manage, boolean assign) {}
   public record Handling(boolean accept, boolean respond, boolean assign, boolean requestSupport,
       List<ComplaintStatusEnum> transitions) {}
-  public record Detail(ComplaintView complaint, String customerName, String invoiceNumber, Handling handling) {
-    public Detail(ComplaintView complaint,String customerName,String invoiceNumber) { this(complaint,customerName,invoiceNumber,null); }
+  public record Detail(ComplaintView complaint, String customerName, Handling handling) {
+    public Detail(ComplaintView complaint,String customerName) { this(complaint,customerName,null); }
   }
   @org.springframework.data.annotation.TypeAlias("com.ecofood.app.complaint.Complaint$Queue")
   public record Queue(String tenantId, String role) {}

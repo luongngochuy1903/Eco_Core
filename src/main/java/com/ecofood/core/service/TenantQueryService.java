@@ -13,6 +13,7 @@ import java.util.List;
 public interface TenantQueryService {
 
   TenantResponse getById(String tenantId);
+  String tenantCode(String tenantId);
 
   /** Every tenant hosted in this realm — a realm is shared by a MASTER_TENANT and all its SUB_TENANTs, so this is never a single tenant. */
   List<TenantResponse> getAllByRealm(String realm);

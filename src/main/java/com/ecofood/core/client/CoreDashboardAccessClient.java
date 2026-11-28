@@ -10,5 +10,8 @@ public class CoreDashboardAccessClient {
   private final DashboardAccessQueryService service;
   public DashboardActor current() { return service.current(); }
   public DashboardActor current(AccessEntityTypeEnum type, String tenant) { return service.current(type, tenant); }
+  public List<DashboardActor> tenantOptions(AccessEntityTypeEnum type) { return service.tenantOptions(type); }
   public List<DashboardActor> authorizedTenants(AccessEntityTypeEnum type) { return service.authorizedTenants(type); }
+  public List<DashboardActor> scopedTenants(AccessEntityTypeEnum type, String root) { return service.scopedTenants(type, root); }
+  public List<com.ecofood.core.dto.DashboardDtos.Option> selectableTenants(AccessEntityTypeEnum type) { return service.selectableTenants(type); }
 }

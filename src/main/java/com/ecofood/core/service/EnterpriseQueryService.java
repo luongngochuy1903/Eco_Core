@@ -21,4 +21,7 @@ public interface EnterpriseQueryService {
    * ownership check a write/edit path still requires.
    */
   List<String> ownedEnterpriseIds(String enterpriseId);
+
+  /** Dashboard-only ownership lookup, accepting the reciprocal OW/BL relationship. */
+  List<String> dashboardChildEnterpriseIds(String enterpriseId);
 }

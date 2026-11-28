@@ -16,6 +16,9 @@ public class DataAccessRuleResponse {
   private String description;
   private String businessEntityId;
   private AccessLevelEnum accessLevel;
+  /** Data Access Rule contract supporting multiple dashboard entity types. */
   private AccessEntityTypeEnum accessEntityType;
+
+  private java.util.List<AccessEntityTypeEnum> accessEntityTypes;
   private int assignedUserCount;
 }

@@ -17,6 +17,10 @@ public class CoreDataAccessRuleClient {
 
   private final DataAccessRuleService dataAccessRuleService;
 
+  public java.util.List<com.ecofood.core.dto.DashboardDtos.Option> eligibleTenants() {
+    return dataAccessRuleService.eligibleTenants();
+  }
+
   public void delete(String id) { dataAccessRuleService.delete(id); }
 
   public DataAccessRuleResponse create(CreateDataAccessRuleRequest request) {

@@ -7,14 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import lombok.Data;
 
-/**
- * PUT /api/v1/data-access-rules/{id}. businessEntityId is deliberately NOT
- * editable here (narrower than CreateDataAccessRuleRequest, same convention
- * as TenantUpdateRequest leaving domainUrl/realm/clientId out) — changing
- * which tenant a rule applies to is treated as a bigger operation than this
- * endpoint covers. Only the rule's own creator may call this — see
- * DataAccessRuleServiceImpl.update's ownership check.
- */
+/** Data Access Rule contract supporting multiple dashboard entity types. */
 @Data
 public class UpdateDataAccessRuleRequest {
 
@@ -24,7 +17,10 @@ public class UpdateDataAccessRuleRequest {
   @NotBlank
   private String description;
 
+  /** Legacy single-type field, retained for existing clients and records. */
   private AccessEntityTypeEnum accessEntityType;
+
+  private java.util.List<AccessEntityTypeEnum> accessEntityTypes;
 
   @NotNull
   private AccessLevelEnum accessLevel;
